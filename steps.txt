@@ -1,0 +1,285 @@
+step-1:  pip is working then  we will install uv 
+
+open the terminal and write the command  'pip install uv' 
+
+How to check the version: 
+
+uv --version 
+
+------------------------------------------
+
+step-2: Apply this command on terminal 
+
+uv init . 
+
+Ye command kya karegi?
+- Current folder ko UV Python project mein initialize karegi.
+- Project configuration ke liye pyproject.toml file create karegi.
+- Project ke liye initial files bhi create kar sakti hai.
+
+------------------------------------
+
+step-3 : Create a virtual Environment  
+So for this , we wil oen the terminal and write 
+
+uv venv 
+
+Now we will activate the venv using this command 
+
+.venv\Scripts\activate
+
+---------------------------------
+
+step-3: Now we will create 'requirements.txt' for installing libraries
+
+----------------------
+
+step-4: Now open the terminal and write command for install the libraries 
+
+uv add -r requirements.txt 
+
+Ye command kya karegi?
+1. requirements.txt ko read karegi.
+2. Usme listed libraries ko install karegi.
+3. Project ki dependencies pyproject.toml mein manage karegi.
+4. uv.lock file create/update karegi.
+Example: NumPy, Pandas, Matplotlib etc. install ho jayengi.
+
+
+
+install verification ke liye 
+uv pip list run kro terminal pr
+
+
+kabhi kabhi Windows + OneDrive ke file linking system mein dikkat hoti hai to .hamara project one drive mai to
+UV libraries install karte waqt hardlink use karne ki koshish kar raha hai, lekin OneDrive ke cloud-managed files ke saath problem aa rahi hai.
+
+Iska simple solution hai: UV ko hardlink ki jagah normal copy use karne ko bolna
+
+terminal mai ye command run krenge
+
+uv add -r requirements.txt --link-mode=copy
+
+--link-mode=copy UV ko hardlink ke bajaye files ki normal copies banane ke liye kahega.
+
+
+
+Libraries installation complete karne ki dobara koshish karega.
+
+------------------------------
+
+step-5: Data store in folder means csv file uplod in vs code folder jisme project bna re hai
+for ex. abhi virtual_environment hai mera folder
+
+-----------------------
+
+step-6: Create a file a.py and write code in it.
+
+a.py mein ye code likho: kuch v bs check ke liye.
+Example:
+
+import numpy as np
+import pandas as pd
+
+print("Virtual Environment Working!")
+
+print(np.array([10, 20, 30]))
+
+print(pd.Series([100, 200, 300]))
+
+-----------------------------
+
+step-7: Run this file using command 
+
+python a.py 
+
+-----------------------------
+
+step-8: Install ipykernel so for that add this requirement in requirements.txt file 
+
+Now again run 
+
+uv add -r requirements.txt 
+
+install library ko dekhne ke liye 
+
+uv pip show libraryname
+
+--------------------------------
+
+step-9: create b.ipynb and write code for it 
+
+isme code run krke dekhenge for Example:
+
+import numpy as np
+import pandas as pd
+
+print("Jupyter Notebook Working!")
+print(np.array([10, 20, 30]))
+
+Agar VS Code kernel select karne ko kahe:
+- Select Kernel par click karo.
+- Python Environments choose karo.
+- Apne project ka .venv environment select karo.
+Isse notebook tumhare banaye hue Virtual Environment ka use karegi.
+
+ex 
+Virtul Environment ka naam folder ke according ho ta hai is case mai mera 
+Virtual_Environment se bnega to use select krna hai
+
+
+
+-----------------------
+
+step-10: Now push this code on github 
+
+phele git pe smae folder name ki repo banaenge
+fir terminal pr
+Step 10.2 — Git verify karna
+git --version then
+
+Step 10.3 — Git configure karna
+git config --global user.name "Your Name"(ek baar he krna hai)
+git config --global user.email "your-email@example.com"(ek baar he krna hai)Yahan apne GitHub account wala email use karna.
+Verify karne ke liye:
+git config --global --list
+Tumhara name aur email show hona chahiye.
+
+Step 10.4 — .gitignore file create karna :
+ .gitignore banayenge (taaki .venv upload na ho).
+ Isme ye content paste karo
+ .venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/  then
+
+tep 10.5 — Git initialize karna
+git init
+
+step 10.6 Files check karna
+git status
+
+
+Step 10.7 — Git Add
+Terminal mein run karo:
+git add .
+Iska kaam: Current project ki saari eligible files ko Git ke staging area mein add karna.
+Dhyan rahe: .gitignore ki wajah se .venv upload nahi hoga.
+
+
+Step 10.8 — Git Commit
+git commit -m "Initial project setup"
+Commit kya hota hai?
+Commit tumhare project ka ek saved checkpoint hota hai. Isse tum changes ka record maintain kar sakte ho.
+
+
+Step 10.9 — Verify
+git status==> output (nothing to commit, working tree clean)
+
+step 10.10
+git branch -M main
+Iska kaam default branch ka naam main rakhna hai.
+
+Step 10.11 — GitHub Repository connect karo
+git remote add origin https://github.com/USERNAME/ml_bot1.git
+Important: USERNAME ki jagah apna actual GitHub username likhna.
+
+Step 10.13 — GitHub par code push karo
+git push -u origin main
+
+
+agar erroe mai ye ho
+error: src refspec main does not match any
+Git ko main branch par push karne ke liye commit nahi mil raha.
+Iska common reason hai ki initial commit properly create nahi hua
+
+
+ Step 1 — Current branch check karo
+ git branch
+
+ Step 2 — Commit check karo
+ git log --oneline
+ Agar output mein commit nahi dikhta aur error aata hai,
+  toh initial commit banana hoga.
+
+Step 3 — Commit create karo or Ye commands ek-ek karke run karo:
+git add .  
+git commit -m "Initial project setup"
+
+
+Step 4 — Branch main set karo
+git branch -M main
+
+
+Step 5 — Push karo
+git push -u origin main
+
+
+
+agar (fatal: 'origin' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.) esa koi error ho to
+Is baar branch ki problem nahi hai. Error ka matlab hai ki tumhari local Git repository mein GitHub repository ka remote connection (origin) set nahi hai.
+
+Hum ise fix karenge. Tumhara local commit safe hai, dobara project banane ki zarurat nahi.
+
+
+Step 1 — Remote connection check karo
+git remote -v
+
+Step 2 — GitHub repository ka URL copy karo
+
+Step 3 — Origin connect karo
+git remote add origin https://github.com/USERNAME/ml_bot1.git
+ex: 
+git remote add origin https://github.com/sharmadeepanshu618-alt/ml_bot1.git
+
+Step 4 — Push karo
+git push -u origin main
+
+
+
+step 11: Future mein jab bhi apne project mein changes karoge aur GitHub par update karna hoga, 
+normally ye 3 commands use karna:
+git add .
+git commit -m "Updated project"
+git push
+
+
+
+important:
+Jo sirf ek baar karna hai
+Command / Setup	Kab?
+pip install uv	UV install hone ke baad repeat nahi
+Git installation	Sirf ek baar
+git config --global user.name	Sirf ek baar
+git config --global user.email	Sirf ek baar
+
+Har naye project mein ye commands use karna
+Maan lo tumhara naya project ml_project2 hai.
+
+uv init .
+uv venv
+.venv\Scripts\activate
+uv add -r requirements.txt --link-mode=copy
+python a.py
+notebook b.ipynb
+
+GitHub par upload karne ke commands
+git init
+git add .
+git commit -m "Initial project setup"
+git branch -M main
+git remote add origin YOUR_NEW_REPOSITORY_UR
+git push -u origin main
+
+
+First time setup
+
+Git, UV aur Git configuration install karna.
+
+Every new project
+
+UV init → venv → activate → libraries → Python/Notebook → GitHub.
